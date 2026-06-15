@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { X, Copy, Check, ExternalLink, Calendar, HardDrive, Crop, Info, ShieldCheck } from 'lucide-react';
+import { X, Copy, Check, ExternalLink, Calendar, HardDrive, Crop, Info, ShieldCheck, Download } from 'lucide-react';
 import { ImageItem } from '../types';
 
 interface LightboxModalProps {
@@ -9,16 +9,24 @@ interface LightboxModalProps {
 
 export default function LightboxModal({ item, onClose }: LightboxModalProps) {
   const [copied, setCopied] = useState(false);
+  const [downloading, setDownloading] = useState(false);
 
-  // Lock scrolling when modal is active
+  // Lock scrolling on document body when modal is active
   useEffect(() => {
     if (item) {
       document.body.style.overflow = 'hidden';
+      // Prevent body elastic-scrolling gesture issues on iOS when modal is open
+      document.body.style.position = 'fixed';
+      document.body.style.width = '100vw';
     } else {
       document.body.style.overflow = 'unset';
+      document.body.style.position = 'unset';
+      document.body.style.width = 'unset';
     }
     return () => {
       document.body.style.overflow = 'unset';
+      document.body.style.position = 'unset';
+      document.body.style.width = 'unset';
     };
   }, [item]);
 
@@ -33,16 +41,41 @@ export default function LightboxModal({ item, onClose }: LightboxModalProps) {
     });
   };
 
+  const handleDownloadImage = async () => {
+    try {
+      setDownloading(true);
+      const response = await fetch(item.url);
+      const blob = await response.blob();
+      const blobUrl = URL.createObjectURL(blob);
+      const link = document.createElement('a');
+      link.href = blobUrl;
+      link.download = item.filename || 'download.jpg';
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+      URL.revokeObjectURL(blobUrl);
+    } catch (error) {
+      console.error('Failed to download image via blob, falling back to direct tab download:', error);
+      const link = document.createElement('a');
+      link.href = item.url;
+      link.target = '_blank';
+      link.download = item.filename || 'download.jpg';
+      link.click();
+    } finally {
+      setDownloading(false);
+    }
+  };
+
   return (
     <div
       id="lightbox-backdrop"
       className="fixed inset-0 z-50 flex items-center justify-center p-4 md:p-6 bg-black/95 backdrop-blur-md animate-fade-in"
       onClick={onClose}
     >
-      {/* Lightbox box */}
+      {/* Lightbox box - optimized with overflow-y-auto and touch inertia scrolling for mobile devices */}
       <div
         id="lightbox-content"
-        className="relative w-full max-w-5xl rounded-2xl bg-cinema-dark border border-white/10 overflow-hidden shadow-2xl flex flex-col md:flex-row max-h-[90vh] md:max-h-[85vh] animate-scale-in"
+        className="relative w-full max-w-5xl rounded-2xl bg-cinema-dark border border-white/10 overflow-y-auto md:overflow-hidden shadow-2xl flex flex-col md:flex-row max-h-[90vh] md:max-h-[85vh] [-webkit-overflow-scrolling:touch] animate-scale-in"
         onClick={(e) => e.stopPropagation()}
       >
         {/* Left Side: Widescreen Cinematic Image Stage */}
@@ -57,14 +90,14 @@ export default function LightboxModal({ item, onClose }: LightboxModalProps) {
           {/* Close button inside image frame (for mobile) */}
           <button
             onClick={onClose}
-            className="md:hidden absolute top-4 right-4 h-9 w-9 rounded-full bg-black/60 backdrop-blur-md text-white hover:bg-black flex items-center justify-center border border-white/10"
+            className="md:hidden absolute top-4 right-4 h-9 w-9 rounded-full bg-black/60 backdrop-blur-md text-white hover:bg-black flex items-center justify-center border border-white/10 cursor-pointer"
           >
             <X className="h-5 w-5" />
           </button>
         </div>
 
-        {/* Right Side: Cinema Technical Specs Control Panel */}
-        <div className="w-full md:w-80 border-t md:border-t-0 md:border-l border-white/10 bg-cinema-gray/60 p-5 md:p-6 flex flex-col justify-between overflow-y-auto shrink-0 md:max-h-full">
+        {/* Right Side: Cinema Technical Specs Control Panel - flows inline on mobile, scrolls inside on desktop */}
+        <div className="w-full md:w-80 border-t md:border-t-0 md:border-l border-white/10 bg-cinema-gray/60 p-5 md:p-6 flex flex-col justify-between overflow-visible md:overflow-y-auto shrink-0 md:max-h-full">
           <div>
             {/* Header / Title */}
             <div className="flex items-start justify-between mb-4">
@@ -78,7 +111,7 @@ export default function LightboxModal({ item, onClose }: LightboxModalProps) {
               </div>
               <button
                 onClick={onClose}
-                className="hidden md:flex h-9 w-9 rounded-xl bg-white/5 hover:bg-white/10 text-gray-400 hover:text-white items-center justify-center transition-colors border border-white/10"
+                className="hidden md:flex h-9 w-9 rounded-xl bg-white/5 hover:bg-white/10 text-gray-400 hover:text-white items-center justify-center transition-colors border border-white/10 cursor-pointer"
               >
                 <X className="h-5 w-5" />
               </button>
@@ -137,7 +170,7 @@ export default function LightboxModal({ item, onClose }: LightboxModalProps) {
                 />
                 <button
                   onClick={handleCopyLink}
-                  className="p-1.5 bg-cinema-gray hover:bg-cinema-amber hover:text-white rounded text-gray-400 transition-all shrink-0"
+                  className="p-1.5 bg-cinema-gray hover:bg-cinema-amber hover:text-white rounded text-gray-400 transition-all shrink-0 cursor-pointer"
                   title="Copy Direct URL"
                 >
                   {copied ? <Check className="h-3.5 w-3.5 text-green-400 font-bold" /> : <Copy className="h-3.5 w-3.5" />}
@@ -150,7 +183,7 @@ export default function LightboxModal({ item, onClose }: LightboxModalProps) {
           <div className="space-y-2 mt-auto">
             <button
               onClick={handleCopyLink}
-              className="w-full flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl bg-cinema-amber text-cinema-black hover:bg-amber-400 font-bold text-xs transition-colors shadow-md"
+              className="w-full flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl bg-cinema-amber text-cinema-black hover:bg-amber-400 font-bold text-xs transition-colors shadow-md cursor-pointer"
             >
               {copied ? (
                 <>
@@ -161,6 +194,22 @@ export default function LightboxModal({ item, onClose }: LightboxModalProps) {
                 <>
                   <Copy className="h-4 w-4" />
                   COPY DIRECT LINK
+                </>
+              )}
+            </button>
+
+            {/* Download Image Action */}
+            <button
+              onClick={handleDownloadImage}
+              disabled={downloading}
+              className="w-full flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl bg-cinema-gray hover:bg-white/10 text-white font-bold text-xs transition-colors border border-white/10 cursor-pointer disabled:opacity-50"
+            >
+              {downloading ? (
+                <span>DOWNLOADING...</span>
+              ) : (
+                <>
+                  <Download className="h-4 w-4" />
+                  DOWNLOAD IMAGE
                 </>
               )}
             </button>
