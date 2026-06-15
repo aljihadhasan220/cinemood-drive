@@ -1,0 +1,6 @@
+{
+  "name": "Cinemood Drive",
+  "description": "An elegant, dark-themed image hosting platform designed to store, discover, and share movie posters and screenshots.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

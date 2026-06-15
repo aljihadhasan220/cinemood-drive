@@ -1,0 +1,78 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 600" width="100%" height="100%">
+  <!-- Background -->
+  <defs>
+    <linearGradient id="sky-grad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#180e03" />
+      <stop offset="40%" stop-color="#3c1e05" />
+      <stop offset="70%" stop-color="#693003" />
+      <stop offset="100%" stop-color="#bd5300" />
+    </linearGradient>
+    <linearGradient id="dune-1" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#1b0a00" />
+      <stop offset="100%" stop-color="#0a0300" />
+    </linearGradient>
+    <linearGradient id="dune-2" x1="100%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#2a1201" />
+      <stop offset="100%" stop-color="#0e0500" />
+    </linearGradient>
+    <linearGradient id="dune-3" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#4e2102" />
+      <stop offset="100%" stop-color="#170700" />
+    </linearGradient>
+    <radialGradient id="sun-glow" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#f59e0b" stop-opacity="0.4" />
+      <stop offset="100%" stop-color="#f59e0b" stop-opacity="0" />
+    </radialGradient>
+  </defs>
+
+  <!-- Sky -->
+  <rect width="400" height="420" fill="url(#sky-grad)" />
+  
+  <!-- Glowing Sun -->
+  <circle cx="200" cy="220" r="120" fill="url(#sun-glow)" />
+  <circle cx="200" cy="220" r="40" fill="#fef08a" opacity="0.9" />
+
+  <!-- Moon silhouette -->
+  <circle cx="310" cy="90" r="8" fill="#f8fafc" opacity="0.4" />
+
+  <!-- Dunes Back (Dune 3) -->
+  <path d="M 0 360 Q 120 300 280 340 T 400 310 L 400 600 L 0 600 Z" fill="url(#dune-3)" />
+
+  <!-- Dunes Mid (Dune 2) -->
+  <path d="M 0 390 Q 160 340 260 410 T 400 370 L 400 600 L 0 600 Z" fill="url(#dune-2)" />
+
+  <!-- Dunes Fore (Dune 1) -->
+  <path d="M 0 440 Q 90 410 210 460 T 400 420 L 400 600 L 0 600 Z" fill="url(#dune-1)" />
+
+  <!-- Minimal traveler silhouette -->
+  <g transform="translate(140, 410)" opacity="0.8">
+    <!-- Body -->
+    <ellipse cx="10" cy="15" rx="2" ry="6" fill="#000000" />
+    <!-- Cloak / Scarf -->
+    <path d="M 10 11 Q 4 14 1 20 Q 8 18 10 14" fill="#ef4444" />
+    <!-- Head -->
+    <circle cx="10" cy="7" r="2.2" fill="#000000" />
+    <!-- Staff -->
+    <line x1="13" y1="2" x2="11" y2="25" stroke="#000000" stroke-width="0.8" />
+  </g>
+
+  <!-- Typography / Layout -->
+  <text x="200" y="60" text-anchor="middle" font-family="'Georgia', serif" font-size="10" fill="#fef08a" letter-spacing="6" opacity="0.8">SPECTACLE ARCHIVE</text>
+  
+  <text x="200" y="115" text-anchor="middle" font-family="'Helvetica Neue', 'Arial', sans-serif" font-size="40" fill="#f8fafc" letter-spacing="12" font-weight="900">CHRONO</text>
+  <text x="200" y="155" text-anchor="middle" font-family="'Helvetica Neue', 'Arial', sans-serif" font-size="24" fill="#fbbf24" letter-spacing="10" font-weight="700">DESERT</text>
+  
+  <text x="200" y="190" text-anchor="middle" font-family="monospace" font-size="9" fill="#94a3b8" letter-spacing="3">VERSION 1.0 (POSTER)</text>
+
+  <!-- Technical Specs Block at Bottom -->
+  <g fill="#78350f" font-family="monospace" font-size="8.5" letter-spacing="1.5">
+    <text x="40" y="520">TAG: #MOVIE1_OFFICIAL</text>
+    <text x="40" y="535">LENS: PRIMO ANAMORPHIC</text>
+    <text x="360" y="520" text-anchor="end">LOC: ARRAKIS REDUX</text>
+    <text x="360" y="535" text-anchor="end">FILTER: WARM PRO</text>
+  </g>
+
+  <!-- Title / Logo Footer -->
+  <rect x="40" y="550" width="320" height="1" fill="#451a03" />
+  <text x="200" y="575" text-anchor="middle" font-family="'Georgia', serif" font-size="15" fill="#fef08a" font-weight="bold" letter-spacing="3">D R I V E</text>
+</svg>
