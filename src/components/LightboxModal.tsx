@@ -78,14 +78,16 @@ export default function LightboxModal({ item, onClose }: LightboxModalProps) {
         className="relative w-full max-w-5xl rounded-2xl bg-cinema-dark border border-white/10 overflow-y-auto md:overflow-hidden shadow-2xl flex flex-col md:flex-row max-h-[90vh] md:max-h-[85vh] [-webkit-overflow-scrolling:touch] animate-scale-in"
         onClick={(e) => e.stopPropagation()}
       >
-        {/* Left Side: Widescreen Cinematic Image Stage */}
+        {/* Left Side: Cinematic Image Stage with fixed 3:4 portrait ratio */}
         <div className="relative flex-grow bg-cinema-black/80 flex items-center justify-center p-4 md:p-6 overflow-hidden min-h-[300px] md:min-h-0">
-          <img
-            src={item.url}
-            alt={item.name}
-            referrerPolicy="no-referrer"
-            className="max-w-full max-h-[50vh] md:max-h-[75vh] object-contain rounded-lg shadow-xl border border-white/5"
-          />
+          <div className="w-full max-w-[280px] sm:max-w-[320px] md:max-w-[400px] aspect-[3/4] overflow-hidden rounded-lg shadow-xl border border-white/5 bg-cinema-black flex items-center justify-center shrink-0">
+            <img
+              src={item.url}
+              alt={item.name}
+              referrerPolicy="no-referrer"
+              className="w-full h-full object-cover"
+            />
+          </div>
           
           {/* Close button inside image frame (for mobile) */}
           <button

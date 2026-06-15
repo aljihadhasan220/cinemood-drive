@@ -12,8 +12,7 @@ export default function ImageCard({ item, onOpenLightbox }: ImageCardProps) {
   const [copied, setCopied] = useState(false);
   const [imgLoaded, setImgLoaded] = useState(false);
 
-  const isPoster = item.category === 'poster';
-  const displayAspect = isPoster ? 'aspect-[2/3]' : 'aspect-[16/9]';
+  const displayAspect = 'aspect-[3/4]';
 
   const handleCopyLink = (e: React.MouseEvent) => {
     e.stopPropagation();
