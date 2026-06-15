@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://cinemood-drive.vercel.app/sitemap.xml

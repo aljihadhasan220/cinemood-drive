@@ -3,7 +3,75 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
-    <title>My Google AI Studio App</title>
+    
+    <!-- Primary SEO Metadata -->
+    <title>Cinemood Drive - Movie Posters & Screenshots Archive</title>
+    <meta name="description" content="Browse and access high-quality movie posters and screenshots from the Cinemood collection. Fast, lightweight and mobile-friendly image archive." />
+    <meta name="keywords" content="Cinemood Drive, Movie Posters, Movie Screenshots, Film Posters, Movie Images, HD Posters, Cinemood Archive" />
+    <meta name="author" content="Cinemood Drive" />
+    <meta name="robots" content="index, follow" />
+    <link rel="canonical" href="https://cinemood-drive.vercel.app/" />
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://cinemood-drive.vercel.app/" />
+    <meta property="og:title" content="Cinemood Drive - Movie Posters & Screenshots Archive" />
+    <meta property="og:description" content="Browse and access high-quality movie posters and screenshots from the Cinemood collection. Fast, lightweight and mobile-friendly image archive." />
+    <meta property="og:image" content="https://cinemood-drive.vercel.app/posters/movie1.jpg" />
+
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image" />
+    <meta property="twitter:url" content="https://cinemood-drive.vercel.app/" />
+    <meta property="twitter:title" content="Cinemood Drive - Movie Posters & Screenshots Archive" />
+    <meta property="twitter:description" content="Browse and access high-quality movie posters and screenshots from the Cinemood collection. Fast, lightweight and mobile-friendly image archive." />
+    <meta property="twitter:image" content="https://cinemood-drive.vercel.app/posters/movie1.jpg" />
+
+    <!-- Resource Preloading / Performance optimization -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+
+    <!-- Structured Data (JSON-LD) - Organization & WebSite Schema -->
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@graph": [
+          {
+            "@type": "WebSite",
+            "@id": "https://cinemood-drive.vercel.app/#website",
+            "url": "https://cinemood-drive.vercel.app/",
+            "name": "Cinemood Drive",
+            "description": "High-quality movie posters and screenshots archive.",
+            "publisher": {
+              "@id": "https://cinemood-drive.vercel.app/#organization"
+            },
+            "potentialAction": [
+              {
+                "@type": "SearchAction",
+                "target": {
+                  "@type": "EntryPoint",
+                  "urlTemplate": "https://cinemood-drive.vercel.app/?s={search_term_string}"
+                },
+                "query-input": "required name=search_term_string"
+              }
+            ],
+            "inLanguage": "en-US"
+          },
+          {
+            "@type": "Organization",
+            "@id": "https://cinemood-drive.vercel.app/#organization",
+            "name": "Cinemood Drive",
+            "url": "https://cinemood-drive.vercel.app/",
+            "logo": {
+              "@type": "ImageObject",
+              "url": "https://cinemood-drive.vercel.app/posters/movie1.jpg",
+              "width": "400",
+              "height": "600"
+            },
+            "sameAs": []
+          }
+        ]
+      }
+    </script>
   </head>
   <body>
     <div id="root"></div>
